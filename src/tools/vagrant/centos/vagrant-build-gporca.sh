@@ -43,4 +43,3 @@ pushd ~/gporca
     make -j4 && make install
   popd
 popd
-

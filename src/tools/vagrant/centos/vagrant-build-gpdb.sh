@@ -15,7 +15,7 @@ export PATH=/usr/local/bin:$PATH
 
 rm -rf /usr/local/gpdb
 pushd ~/gpdb
-  ./configure --prefix=/usr/local/gpdb $@
+  ./configure --prefix=/usr/local/gpdb "$@"
   make clean
   make -j4 -s && make install
 popd
@@ -28,7 +28,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 
 # BUG: fix the LD_LIBRARY_PATH to find installed GPOPT libraries
-echo export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH >> /usr/local/gpdb/greenplum_path.sh
+echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH' | sudo tee -a /usr/local/gpdb/greenplum_path.sh >/dev/null
 
 # use gpdemo to start the cluster
 pushd ~/gpdb/gpAux/gpdemo
